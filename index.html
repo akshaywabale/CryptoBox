@@ -1,120 +1,137 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CryptoBox</title>
+<title>CryptoBox - Password Strength Checker</title>
 
 <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
 <div class="container">
 
-<h1 class="logo">CRYPTOBOX</h1>
+    <h1 class="logo">CRYPTOBOX</h1>
 
-<p class="subtitle">
-Password Security Analyzer v2.6
-</p>
+    <p class="subtitle">
+        Password Security Analyzer v2.6
+    </p>
 
-<div class="tabs">
+    <div class="tabs">
+        <button class="tab active">Strength Checker</button>
+        <button class="tab">Generator</button>
+        <button class="tab">Breach DB</button>
+    </div>
 
-<button class="tab active">
-Strength Checker
-</button>
+    <!-- Password Checker -->
 
-<button class="tab">
-Generator
-</button>
+    <div class="panel">
 
-<button class="tab">
-Breach DB
-</button>
+        <h2>Analyze Password</h2>
 
-</div>
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter Password..."
+        >
 
-<div class="panel">
+        <div class="progress">
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+        </div>
 
-<h2>Analyze Password</h2>
+        <br>
 
-<input
-type="password"
-id="password"
-placeholder="Enter Password..."
->
+        <h3 id="strengthText">
+            WEAK
+        </h3>
 
-<div class="progress">
+        <div class="stats">
 
-<div
-class="progress-bar"
-id="progressBar">
-</div>
+            <div class="card">
+                <h3 id="entropy">0</h3>
+                <p>Entropy</p>
+            </div>
 
-</div>
+            <div class="card">
+                <h3 id="length">0</h3>
+                <p>Length</p>
+            </div>
 
-<div class="stats">
+            <div class="card">
+                <h3 id="crack">-</h3>
+                <p>Crack Time</p>
+            </div>
 
-<div class="card">
-<h3 id="entropy">0</h3>
-<p>Entropy</p>
-</div>
+            <div class="card">
+                <h3 id="score">0</h3>
+                <p>Score</p>
+            </div>
 
-<div class="card">
-<h3 id="length">0</h3>
-<p>Length</p>
-</div>
+            <div class="card">
+                <h3 id="breachStatus">SAFE</h3>
+                <p>Breach Check</p>
+            </div>
 
-<div class="card">
-<h3 id="crack">-</h3>
-<p>Crack Time</p>
-</div>
+        </div>
 
-<div class="card">
-<h3 id="score">0</h3>
-<p>Score</p>
-</div>
+        <div class="checks">
 
-</div>
+            <p id="c1" class="invalid">
+                ✖ Min 8 Characters
+            </p>
 
-<div class="checks">
+            <p id="c2" class="invalid">
+                ✖ Uppercase Letter
+            </p>
 
-<p id="c1">✖ Min 8 Characters</p>
-<p id="c2">✖ Uppercase Letter</p>
-<p id="c3">✖ Lowercase Letter</p>
-<p id="c4">✖ Number</p>
-<p id="c5">✖ Special Symbol</p>
+            <p id="c3" class="invalid">
+                ✖ Lowercase Letter
+            </p>
 
-</div>
+            <p id="c4" class="invalid">
+                ✖ Number
+            </p>
 
-</div>
+            <p id="c5" class="invalid">
+                ✖ Special Symbol
+            </p>
 
-<br>
+        </div>
 
-<div class="panel">
+    </div>
 
-<h2>Password Generator</h2>
+    <br>
 
-<input
-type="text"
-id="generatedPassword"
-readonly
->
+    <!-- Password Generator -->
 
-<br><br>
+    <div class="panel">
 
-<button
-class="btn"
-id="generateBtn">
+        <h2>Password Generator</h2>
 
-Generate Password
+        <input
+            type="text"
+            id="generatedPassword"
+            readonly
+            placeholder="Generated Password"
+        >
 
-</button>
+        <br><br>
 
-</div>
+        <button
+            class="btn"
+            id="generateBtn">
+
+            Generate Password
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -124,3 +141,4 @@ Generate Password
 
 </body>
 </html>
+```
