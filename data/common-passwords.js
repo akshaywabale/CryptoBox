@@ -1,9 +1,14 @@
-const commonPasswords = [
-    "123456",
-    "password",
-    "qwerty",
-    "admin",
-    "welcome",
-    "abc123",
-    "letmein"
-];
+[
+"123456",
+"password",
+"admin",
+"qwerty",
+"12345678",
+"welcome",
+"password123",
+"abc123",
+"letmein",
+"football",
+"monkey",
+"dragon"
+]

@@ -1,30 +1,94 @@
-function checkPassword(){
+const passwordInput = document.getElementById("password");
+const progressBar = document.getElementById("progressBar");
 
-    let password =
-    document.getElementById("password").value;
+const entropy = document.getElementById("entropy");
+const lengthEl = document.getElementById("length");
+const crack = document.getElementById("crack");
+const score = document.getElementById("score");
 
-    let score = 0;
+passwordInput.addEventListener("input", analyzePassword);
 
-    if(password.length >= 8) score++;
-    if(/[A-Z]/.test(password)) score++;
-    if(/[a-z]/.test(password)) score++;
-    if(/[0-9]/.test(password)) score++;
-    if(/[!@#$%^&*]/.test(password)) score++;
+function analyzePassword() {
 
-    let result = "";
+    const pwd = passwordInput.value;
 
-    if(score <= 2)
-        result = "Weak Password";
+    let scoreValue = 0;
 
-    else if(score <= 4)
-        result = "Medium Password";
+    const hasUpper = /[A-Z]/.test(pwd);
+    const hasLower = /[a-z]/.test(pwd);
+    const hasNumber = /\d/.test(pwd);
+    const hasSymbol = /[^A-Za-z0-9]/.test(pwd);
 
-    else
-        result = "Strong Password";
+    if (pwd.length >= 8) scoreValue += 20;
+    if (hasUpper) scoreValue += 20;
+    if (hasLower) scoreValue += 20;
+    if (hasNumber) scoreValue += 20;
+    if (hasSymbol) scoreValue += 20;
 
-    if(commonPasswords.includes(password)){
-        result += " ⚠ Common Password";
-    }
+    progressBar.style.width = scoreValue + "%";
 
-    document.getElementById("strength").innerHTML = result;
+    score.innerText = scoreValue;
+    lengthEl.innerText = pwd.length;
+
+    const charset =
+        (hasUpper ? 26 : 0) +
+        (hasLower ? 26 : 0) +
+        (hasNumber ? 10 : 0) +
+        (hasSymbol ? 32 : 0);
+
+    const entropyValue =
+        pwd.length * Math.log2(charset || 1);
+
+    entropy.innerText =
+        entropyValue.toFixed(1);
+
+    crack.innerText =
+        estimateCrackTime(entropyValue);
+
+    updateChecks(
+        pwd,
+        hasUpper,
+        hasLower,
+        hasNumber,
+        hasSymbol
+    );
+}
+
+function estimateCrackTime(bits) {
+
+    if(bits < 30) return "Seconds";
+    if(bits < 45) return "Minutes";
+    if(bits < 60) return "Hours";
+    if(bits < 75) return "Days";
+    if(bits < 90) return "Years";
+
+    return "Centuries";
+}
+
+function updateChecks(
+    pwd,
+    upper,
+    lower,
+    num,
+    sym
+){
+    setCheck("c1", pwd.length >= 8);
+    setCheck("c2", upper);
+    setCheck("c3", lower);
+    setCheck("c4", num);
+    setCheck("c5", sym);
+}
+
+function setCheck(id, valid){
+
+    const item =
+        document.getElementById(id);
+
+    item.className =
+        valid ? "check valid" : "check invalid";
+
+    item.innerHTML =
+        valid
+        ? "✔ " + item.innerText.slice(2)
+        : "✖ " + item.innerText.slice(2);
 }
