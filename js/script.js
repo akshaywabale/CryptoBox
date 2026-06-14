@@ -1,148 +1,191 @@
-const passwordInput = document.getElementById("password");
-const progressBar = document.getElementById("progressBar");
+const passwordInput =
+document.getElementById("password");
 
-passwordInput.addEventListener("input", analyzePassword);
+const progressBar =
+document.getElementById("progressBar");
 
 const commonPasswords = [
-    "123456",
-    "12345678",
-    "password",
-    "password123",
-    "admin",
-    "qwerty",
-    "welcome",
-    "abc123",
-    "letmein",
-    "iloveyou",
-    "dragon",
-    "football"
+"123456",
+"12345678",
+"password",
+"password123",
+"admin",
+"qwerty",
+"welcome",
+"abc123",
+"letmein"
 ];
 
-function analyzePassword() {
+passwordInput.addEventListener(
+"input",
+analyzePassword
+);
 
-    const pwd = passwordInput.value;
+function analyzePassword(){
 
-    const hasUpper = /[A-Z]/.test(pwd);
-    const hasLower = /[a-z]/.test(pwd);
-    const hasNumber = /\d/.test(pwd);
-    const hasSymbol = /[^A-Za-z0-9]/.test(pwd);
+const pwd =
+passwordInput.value;
 
-    let score = 0;
+const hasUpper =
+/[A-Z]/.test(pwd);
 
-    // Length Score
-    if (pwd.length >= 8) score += 20;
-    if (pwd.length >= 12) score += 15;
-    if (pwd.length >= 16) score += 15;
+const hasLower =
+/[a-z]/.test(pwd);
 
-    // Character Variety
-    if (hasUpper) score += 10;
-    if (hasLower) score += 10;
-    if (hasNumber) score += 15;
-    if (hasSymbol) score += 15;
+const hasNumber =
+/\d/.test(pwd);
 
-    // Penalty
-    if (commonPasswords.includes(pwd.toLowerCase())) {
-        score = 5;
-    }
+const hasSymbol =
+/[^A-Za-z0-9]/.test(pwd);
 
-    if (score > 100) score = 100;
+let score = 0;
 
-    document.getElementById("score").innerText = score;
-    document.getElementById("length").innerText = pwd.length;
+if(pwd.length >= 8)
+score += 20;
 
-    // Progress Bar
+if(pwd.length >= 12)
+score += 15;
 
-    progressBar.style.width = score + "%";
+if(pwd.length >= 16)
+score += 15;
 
-    if (score < 40) {
-        progressBar.style.background = "#ff3c6f";
-        document.getElementById("strengthText").innerText = "WEAK";
-    }
-    else if (score < 70) {
-        progressBar.style.background = "#ffae00";
-        document.getElementById("strengthText").innerText = "MEDIUM";
-    }
-    else {
-        progressBar.style.background = "#00ff88";
-        document.getElementById("strengthText").innerText = "STRONG";
-    }
+if(hasUpper)
+score += 10;
 
-    // Entropy
+if(hasLower)
+score += 10;
 
-    let charset = 0;
+if(hasNumber)
+score += 15;
 
-    if (hasLower) charset += 26;
-    if (hasUpper) charset += 26;
-    if (hasNumber) charset += 10;
-    if (hasSymbol) charset += 32;
+if(hasSymbol)
+score += 15;
 
-    const entropy =
-        pwd.length * Math.log2(charset || 1);
-
-    document.getElementById("entropy").innerText =
-        entropy.toFixed(1);
-
-    // Crack Time
-
-    let crackTime;
-
-    if (entropy < 28)
-        crackTime = "Seconds";
-    else if (entropy < 36)
-        crackTime = "Minutes";
-    else if (entropy < 60)
-        crackTime = "Hours";
-    else if (entropy < 80)
-        crackTime = "Years";
-    else
-        crackTime = "Centuries";
-
-    document.getElementById("crack").innerText =
-        crackTime;
-
-    // Breach Check
-
-    const breach =
-        commonPasswords.includes(
-            pwd.toLowerCase()
-        );
-
-    document.getElementById("breachStatus").innerText =
-        breach ? "WARN" : "SAFE";
-
-    document.getElementById("breachStatus").style.color =
-        breach ? "#ff3c6f" : "#00ff88";
-
-    // Checklist
-
-    updateChecks(
-        pwd,
-        hasUpper,
-        hasLower,
-        hasNumber,
-        hasSymbol
-    );
+if(commonPasswords.includes(
+pwd.toLowerCase()
+)){
+score = 5;
 }
 
-function updateChecks(
-    pwd,
-    upper,
-    lower,
-    num,
-    sym
-) {
-    setCheck("c1", pwd.length >= 8);
-    setCheck("c2", upper);
-    setCheck("c3", lower);
-    setCheck("c4", num);
-    setCheck("c5", sym);
+if(score > 100)
+score = 100;
+
+document.getElementById(
+"score"
+).innerText = score;
+
+document.getElementById(
+"length"
+).innerText = pwd.length;
+
+progressBar.style.width =
+score + "%";
+
+if(score < 40){
+
+progressBar.style.background =
+"#ff3c6f";
+
+document.getElementById(
+"strengthText"
+).innerText = "WEAK";
+
+}else if(score < 70){
+
+progressBar.style.background =
+"#ffae00";
+
+document.getElementById(
+"strengthText"
+).innerText = "MEDIUM";
+
+}else{
+
+progressBar.style.background =
+"#00ff88";
+
+document.getElementById(
+"strengthText"
+).innerText = "STRONG";
 }
 
-function setCheck(id, valid) {
+let charset = 0;
 
-    const item =
-        document.getElementById(id);
+if(hasLower) charset += 26;
+if(hasUpper) charset += 26;
+if(hasNumber) charset += 10;
+if(hasSymbol) charset += 32;
 
-    item.className =
-        valid ? "check valid" : "check invalid";
+const entropy =
+pwd.length *
+Math.log2(charset || 1);
+
+document.getElementById(
+"entropy"
+).innerText =
+entropy.toFixed(1);
+
+let crackTime;
+
+if(entropy < 28)
+crackTime = "Seconds";
+
+else if(entropy < 36)
+crackTime = "Minutes";
+
+else if(entropy < 60)
+crackTime = "Hours";
+
+else if(entropy < 80)
+crackTime = "Years";
+
+else
+crackTime = "Centuries";
+
+document.getElementById(
+"crack"
+).innerText =
+crackTime;
+
+const breach =
+commonPasswords.includes(
+pwd.toLowerCase()
+);
+
+document.getElementById(
+"breachStatus"
+).innerText =
+breach ? "WARN" : "SAFE";
+
+document.getElementById(
+"breachStatus"
+).style.color =
+breach
+? "#ff3c6f"
+: "#00ff88";
+
+setCheck("c1", pwd.length >= 8);
+setCheck("c2", hasUpper);
+setCheck("c3", hasLower);
+setCheck("c4", hasNumber);
+setCheck("c5", hasSymbol);
+}
+
+function setCheck(id, valid){
+
+const item =
+document.getElementById(id);
+
+const text =
+item.textContent.substring(2);
+
+item.innerHTML =
+valid
+? "✔ " + text
+: "✖ " + text;
+
+item.style.color =
+valid
+? "#00ff88"
+: "#ff3c6f";
 }

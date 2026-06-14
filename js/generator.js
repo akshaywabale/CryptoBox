@@ -1,5 +1,7 @@
 const generateBtn =
-document.getElementById("generateBtn");
+document.getElementById(
+"generateBtn"
+);
 
 generateBtn.addEventListener(
 "click",
@@ -24,6 +26,6 @@ Math.random()*chars.length
 
 document.getElementById(
 "generatedPassword"
-).value = password;
-
+).value =
+password;
 }

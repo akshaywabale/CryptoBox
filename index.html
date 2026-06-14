@@ -1,12 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CryptoBox - Password Strength Checker</title>
-
+<title>CryptoBox</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -14,131 +11,95 @@
 
 <div class="container">
 
-    <h1 class="logo">CRYPTOBOX</h1>
+<h1 class="logo">CRYPTOBOX</h1>
+<p class="subtitle">Cyber Password Strength Checker</p>
 
-    <p class="subtitle">
-        Password Security Analyzer v2.6
-    </p>
+<div class="panel">
 
-    <div class="tabs">
-        <button class="tab active">Strength Checker</button>
-        <button class="tab">Generator</button>
-        <button class="tab">Breach DB</button>
-    </div>
+<h2>Password Analyzer</h2>
 
-    <!-- Password Checker -->
+<input
+type="password"
+id="password"
+placeholder="Enter Password..."
+>
 
-    <div class="panel">
+<div class="progress">
+<div id="progressBar" class="progress-bar"></div>
+</div>
 
-        <h2>Analyze Password</h2>
+<h3 id="strengthText">WEAK</h3>
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Enter Password..."
-        >
+<div class="stats">
 
-        <div class="progress">
-            <div
-                class="progress-bar"
-                id="progressBar">
-            </div>
-        </div>
+<div class="card">
+<h3 id="score">0</h3>
+<p>Score</p>
+</div>
 
-        <br>
+<div class="card">
+<h3 id="length">0</h3>
+<p>Length</p>
+</div>
 
-        <h3 id="strengthText">
-            WEAK
-        </h3>
+<div class="card">
+<h3 id="entropy">0</h3>
+<p>Entropy</p>
+</div>
 
-        <div class="stats">
+<div class="card">
+<h3 id="crack">-</h3>
+<p>Crack Time</p>
+</div>
 
-            <div class="card">
-                <h3 id="entropy">0</h3>
-                <p>Entropy</p>
-            </div>
+<div class="card">
+<h3 id="breachStatus">SAFE</h3>
+<p>Breach Check</p>
+</div>
 
-            <div class="card">
-                <h3 id="length">0</h3>
-                <p>Length</p>
-            </div>
+</div>
 
-            <div class="card">
-                <h3 id="crack">-</h3>
-                <p>Crack Time</p>
-            </div>
+<div class="checks">
 
-            <div class="card">
-                <h3 id="score">0</h3>
-                <p>Score</p>
-            </div>
+<p id="c1">✖ Min 8 Characters</p>
+<p id="c2">✖ Uppercase Letter</p>
+<p id="c3">✖ Lowercase Letter</p>
+<p id="c4">✖ Number</p>
+<p id="c5">✖ Special Symbol</p>
 
-            <div class="card">
-                <h3 id="breachStatus">SAFE</h3>
-                <p>Breach Check</p>
-            </div>
+</div>
 
-        </div>
+</div>
 
-        <div class="checks">
+<br>
 
-            <p id="c1" class="invalid">
-                ✖ Min 8 Characters
-            </p>
+<div class="panel">
 
-            <p id="c2" class="invalid">
-                ✖ Uppercase Letter
-            </p>
+<h2>Password Generator</h2>
 
-            <p id="c3" class="invalid">
-                ✖ Lowercase Letter
-            </p>
+<input
+type="text"
+id="generatedPassword"
+readonly
+placeholder="Generated Password"
+>
 
-            <p id="c4" class="invalid">
-                ✖ Number
-            </p>
+<br><br>
 
-            <p id="c5" class="invalid">
-                ✖ Special Symbol
-            </p>
+<button
+class="btn"
+id="generateBtn">
 
-        </div>
+Generate Password
 
-    </div>
+</button>
 
-    <br>
-
-    <!-- Password Generator -->
-
-    <div class="panel">
-
-        <h2>Password Generator</h2>
-
-        <input
-            type="text"
-            id="generatedPassword"
-            readonly
-            placeholder="Generated Password"
-        >
-
-        <br><br>
-
-        <button
-            class="btn"
-            id="generateBtn">
-
-            Generate Password
-
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 <script src="js/strength.js"></script>
 <script src="js/generator.js"></script>
-<script src="js/breach.js"></script>
 
 </body>
 </html>
-```
